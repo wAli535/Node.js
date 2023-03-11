@@ -83,12 +83,20 @@ async function addCategory(){
                 name: {
                     description: "Enter Frnd name:",
                     type:"string"
+                },
+                cellno:{
+                    description:"Enter Cell No:",
+                    type:"number"
+                },
+                dtbirth:{
+                    description:"Enter Date of Birth:",
+                    type:"number"
                 }
             }
         };
         prompt.start();
-        const { id , name} =await prompt.get(schema)
-        const c = new Category(id,name);
+        const { id , name,cellno,dtbirth} =await prompt.get(schema)
+        const c = new Category(id,name,cellno,dtbirth);
         DataHandler.AddCategory(c);
         console.log("Frnd Data is added");
     }
