@@ -91,12 +91,18 @@ async function addCategory(){
                 dtbirth:{
                     description:"Enter Date of Birth:",
                     type:"number"
+                },
+                group:{
+                    description:"Enter Group name you wants to add:",
+                    type:"string"
                 }
             }
         };
+        groups();
+        
         prompt.start();
-        const { id , name,cellno,dtbirth} =await prompt.get(schema)
-        const c = new Category(id,name,cellno,dtbirth);
+        const { id , name,cellno,dtbirth,group} =await prompt.get(schema)
+        const c = new Category(id,name,cellno,dtbirth,group);
         DataHandler.AddCategory(c);
         console.log("Frnd Data is added");
     }
@@ -133,11 +139,16 @@ async function updateCategory(){
                 dtbirth:{
                     description:"Enter Date Of Birth:",
                     type:"number"
+                },
+                group:{
+                    description:"Enter Group name you wants to update:",
+                    type:"string"
                 }
             }
         };
-        let {name , cellno , dtbirth} = await prompt.get(schema2);
-        DataHandler.UpdateCategory(idToSearch, new Category(idToSearch,name,cellno,dtbirth));
+        groups();
+        let {name , cellno , dtbirth,group} = await prompt.get(schema2);
+        DataHandler.UpdateCategory(idToSearch, new Category(idToSearch,name,cellno,dtbirth,group));
         console.log(`Data is  updated`);
     }
     catch (err) {
@@ -171,7 +182,7 @@ async function deleteCategory(){
         let {confirm} = await prompt.get(schema2);
         if(confirm ==="y"){
             DataHandler.DeleteCategory(idToSearch);
-            console.log(`Fends Data is deleted`);
+            console.log(`Frnds Data is deleted`);
         }
         else{
             console.log(`Frnds data is not Deleted`);
@@ -192,6 +203,12 @@ async function showCategories(){
     catch (err){
         console.log(err);
     }
+}
+
+function groups(){
+        console.log("1","Evs_Group");
+        console.log("2","Mern_stack");
+        console.log("3","System_group");
 }
 
 
